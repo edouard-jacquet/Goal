@@ -1,0 +1,36 @@
+/* ============================== *\
+   => STYLE
+\* ============================== */
+
+html {
+	height: 100%;
+}
+
+body {
+	min-height: 100%;
+	position: relative;
+}
+
+#header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+}
+
+#header > .navigation-bar {
+	margin-bottom: 0;
+}
+
+#body {
+	padding-top: 68px;
+	padding-bottom: 100px;
+	overflow:auto;
+}
+
+#footer {
+	width: 100%;
+	height: 100px;
+	position: absolute;
+	bottom: 0;
+}
