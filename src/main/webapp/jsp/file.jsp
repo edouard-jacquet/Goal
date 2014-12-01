@@ -1,13 +1,16 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+<c:import url="var.jsp"/>
+
 <!DOCTYPE html>
 <html lang='fr'>
 	<head>
 		<meta charset='utf-8' />
+		<meta name='viewport' content='width=device-width, initial-scale=1' />
 		<title>file - <c:out value="${file.title}"/></title>
-		<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
-		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<link rel='stylesheet' type='text/css' href='css/bootstrap.css' />
+		<link rel='stylesheet' type='text/css' href='css/style.css' />
 		<script src='js/jquery.js'></script>
 		<script src='js/bootstrap.js'></script>
 	</head>
@@ -19,11 +22,12 @@
 					<a class='navigation-bar__brand' href='home'>Goal</a>
 				</div>
 				<div class='navigation-bar__body'>
-					<a class='button button--primary navigation-bar__button navigation-bar--right' href='connexion'>Connexion</a>
+					<c:import url="guest.jsp"/>
 				</div>
 			</div>
 		</header>
 		<section id='body'>
+			<c:import url="notifications.jsp"/>
 			<div class='grid'>
 				<div class='row'>
 					<div class='column small-12'>

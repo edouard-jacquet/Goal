@@ -1,0 +1,14 @@
+/* ============================== *\
+   => CONNEXION
+\* ============================== */
+
+
+@media only screen and (min-width: 640px) {
+    .panel {
+		box-shadow: 0px 0px 10px rgba(000, 000, 000, 0.3);
+	}
+}
+
+.panel__body .row {
+	margin-bottom: 15px;
+}

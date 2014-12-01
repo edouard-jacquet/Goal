@@ -1,14 +1,17 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+<c:import url="var.jsp"/>
+
 <!DOCTYPE html>
 <html lang='fr'>
 	<head>
 		<meta charset='utf-8' />
+		<meta name='viewport' content='width=device-width, initial-scale=1' />
 		<title>search</title>
-		<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
-		<link rel="stylesheet" type="text/css" href="css/style.css" />
-		<link rel="stylesheet" type="text/css" href="css/search.css" />
+		<link rel='stylesheet' type='text/css' href='css/bootstrap.css' />
+		<link rel='stylesheet' type='text/css' href='css/style.css' />
+		<link rel='stylesheet' type='text/css' href='css/search.css' />
 		<script src='js/jquery.js'></script>
 		<script src='js/bootstrap.js'></script>
 	</head>
@@ -28,14 +31,15 @@
 							</span>
 						</div>
 					</form>
-					<a class='button button--primary navigation-bar__button navigation-bar--right' href='connexion'>Connexion</a>
+					<c:import url="guest.jsp"/>
 				</div>
 			</div>
 		</header>
 		<section id='body'>
+			<c:import url="notifications.jsp"/>
 			<div class='grid'>
 				<div class='row'>
-					<c:if test="${results.size() > 0}">
+					<c:if test="${results != null && results.size() > 0}">
 						<c:forEach var="result" items="${results}" varStatus="idx">
 							<div class='column small-12'>
 								<div class='thumbnail'>
@@ -55,7 +59,7 @@
 							</div>
 						</c:forEach>
 					</c:if>
-					<c:if test='${results.size() == 0}'>
+					<c:if test='${results != null && results.size() == 0}'>
 						<div class='column small-12'>
 							<h3>No Results Found.</h3>
 							<p>
@@ -67,7 +71,7 @@
 			</div>	
 		</section>
 		<footer id='footer' class='text-center'>
-			<c:if test="${results.size() > 0}">
+			<c:if test="${results != null && results.size() > 0}">
 				<ul class='pagination'>		
 					<li class='disabled'><a href='#'>&larr;</a></li>
 					<li class='active'><a href='#'>1</a></li>
