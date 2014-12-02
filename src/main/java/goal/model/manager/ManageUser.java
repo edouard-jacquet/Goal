@@ -43,7 +43,7 @@ public class ManageUser {
 		if(!notifications.isEmpty()) { throw new Exception(); }
 		
 		// Recuperation de l'utilisateur
-		User user = userDAO.getUser(login, password);
+		User user = userDAO.getUserByConnection(login, password);
 		
 		if(user == null) { 
 			notifications.add(new Notification("alert", "User doesn't exist."));
@@ -81,14 +81,16 @@ public class ManageUser {
 		if(!notifications.isEmpty()) { throw new Exception(); }
 		
 		// Controle si l'utilisateur existe déja
-		User user = userDAO.getUser(login, password);
-		if(user != null) { 
+		if(!userDAO.UserNotExist(login)) { 
 			notifications.add(new Notification("alert", "User exist already."));
 			throw new Exception();
 		}
 		
 		// Ajout de l'utilisateur
-		if(!userDAO.addUser(login, password)) {
+		User user = new User();
+		user.setLogin(login);
+		user.setPassword(password);
+		if(!userDAO.addUser(user)) {
 			notifications.add(new Notification("alert", "User hasn't been created."));
 			throw new Exception();
 		}
