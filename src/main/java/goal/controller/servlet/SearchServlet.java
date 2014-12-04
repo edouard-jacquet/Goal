@@ -1,6 +1,7 @@
 package goal.controller.servlet;
 
 import goal.model.manager.ManageSearch;
+import goal.model.manager.ManageUser;
 
 import java.io.IOException;
 
@@ -15,10 +16,12 @@ public class SearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		response.sendRedirect(request.getContextPath() + "/home");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ManageUser manageUser = new ManageUser();
+		manageUser.authenticationCookie(request, response);
 		String query = request.getParameter("search");
 		if(query.length() > 0) {
 			ManageSearch manageSearch = new ManageSearch();

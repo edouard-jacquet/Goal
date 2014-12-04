@@ -57,7 +57,7 @@
 								<div class='row'>
 									<div class='column small-6 text-left'>
 										<label>
-											<input type='checkbox' name='remember'/>
+											<input type='checkbox' name='remember' checked/>
 											Remember me
 										</label>
 									</div>

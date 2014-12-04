@@ -1,6 +1,7 @@
 package goal.controller.servlet;
 
 import goal.model.dao.FileDAO;
+import goal.model.manager.ManageUser;
 
 import java.io.IOException;
 
@@ -15,6 +16,8 @@ public class ResourceServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ManageUser manageUser = new ManageUser();
+		manageUser.authenticationCookie(request, response);
 		String type = request.getParameter("type");
 		switch(type) {
 			case "text":

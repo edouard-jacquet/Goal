@@ -9,7 +9,7 @@ public class UserDAO {
 	
 	private EntityManager entityManager = Connection.getInstance().getConnection();
 	
-	public boolean addUser(User user) {
+	public boolean add(User user) {
 		try {
 			entityManager.getTransaction().begin();
 			entityManager.persist(user);
@@ -23,7 +23,7 @@ public class UserDAO {
 		}
 	}
 	
-	public boolean UserNotExist(String login) {
+	public boolean notExist(String login) {
 		try {
 			entityManager.createQuery("SELECT u FROM User u WHERE u.login = :login")
 			.setParameter("login", login)
@@ -38,11 +38,25 @@ public class UserDAO {
 		}
 	}
 	
-	public User getUserByConnection(String login, String password) {
+	public User getByConnection(String login, String password) {
 		try {
 			return (User)entityManager.createQuery("SELECT u FROM User u WHERE u.login = :login AND u.password = :password")
 			.setParameter("login", login)
 			.setParameter("password", password)
+			.getSingleResult();
+		}
+		catch(NoResultException e) {
+			return null;
+		}
+		catch(Exception e) {
+			return null;
+		}
+	}
+	
+	public User getById(long id) {
+		try {
+			return (User)entityManager.createQuery("SELECT u FROM User u WHERE u.id = :id")
+			.setParameter("id", id)
 			.getSingleResult();
 		}
 		catch(NoResultException e) {

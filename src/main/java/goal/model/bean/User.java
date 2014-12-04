@@ -19,6 +19,12 @@ public class User {
 	private String login;
 	@Column(name="USER_PASSWORD", length=100, nullable=false)
 	private String password;
+	@Column(name="USER_KEY", nullable=false)
+	private String key;
+	
+	public long getId() {
+		return id;
+	}
 	
 	public String getLogin() {
 		return login;
@@ -26,11 +32,19 @@ public class User {
 	public void setLogin(String login) {
 		this.login = login;
 	}
+	
 	public String getPassword() {
 		return password;
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public String getKey() {
+		return key;
+	}
+	public void setKey(String key) {
+		this.key = key;
 	}
 	
 }

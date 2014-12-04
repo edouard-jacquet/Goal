@@ -1,6 +1,5 @@
 package goal.controller.servlet;
 
-import goal.model.bean.User;
 import goal.model.manager.ManageUser;
 
 import java.io.IOException;
@@ -10,15 +9,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 @WebServlet("/create-account")
 public class CreateAccountServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
   
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(true);
-		if(session.getAttribute("guest") != null && session.getAttribute("guest") instanceof User) {
+		ManageUser manageUser = new ManageUser();
+		manageUser.authenticationCookie(request, response);
+		if(manageUser.isLogged(request, response)) {
 			response.sendRedirect(request.getContextPath() + "/home");
 		}
 		else {
