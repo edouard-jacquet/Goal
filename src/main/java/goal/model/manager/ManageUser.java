@@ -2,7 +2,6 @@ package goal.model.manager;
 
 import java.math.BigInteger;
 import java.security.SecureRandom;
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -19,19 +18,19 @@ import javax.servlet.http.HttpSession;
 
 public class ManageUser {
 	
-	// Regex controle de champ
+	// Constantes de configuration
 	private final String REGEX_LOGIN = "[a-zA-Z][a-zA-Z0-9.]+";
 	private final String REGEX_PASSWORD = "[a-zA-Z][a-zA-Z0-9.]+";
 	private final String SESSION_NAME = "guest";
 	private final String COOKIE_NAME = "goal_auth";
 	private final String COOKIE_DELIMITER = "----";
 	private final int COOKIE_MAXAGE = 60 * 60 * 24;
-	// Liste des erreurs
+	// Liste des notifications (default, success, info, warning, error)
 	private List<Notification> notifications = new LinkedList<Notification>();
 	// DAO pour les utilisateurs
 	private UserDAO userDAO = new UserDAO();
 	
-	public void create (HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public void create(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String login = request.getParameter("login");
 		String password = request.getParameter("password");
 		
@@ -69,7 +68,7 @@ public class ManageUser {
 			
 	}
 	
-	public void authentication (HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public void authentication(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String login = request.getParameter("login");
 		String password = request.getParameter("password");
 		String remember = request.getParameter("remember");
@@ -114,7 +113,7 @@ public class ManageUser {
 	
 	public boolean isLogged(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession(true);
-		if(session.getAttribute("guest") != null && session.getAttribute("guest") instanceof User) {
+		if(session.getAttribute(this.SESSION_NAME) != null && session.getAttribute(this.SESSION_NAME) instanceof User) {
 			return true;
 		}	
 		return false;
@@ -123,7 +122,7 @@ public class ManageUser {
 	public void authenticationCookie(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession(true);
 		// Verifie que le user n'est pas deja connecte
-		if(session.getAttribute("guest") == null || (session.getAttribute("guest") instanceof User) == false) {
+		if(session.getAttribute(this.SESSION_NAME) == null || (session.getAttribute(this.SESSION_NAME) instanceof User) == false) {
 			if(this.getCookieValue(this.COOKIE_NAME, request) != null) {
 				// Coupe la valeur du cookie
 				String[] cookie = this.getCookieValue(this.COOKIE_NAME, request).split(this.COOKIE_DELIMITER);
@@ -145,7 +144,7 @@ public class ManageUser {
 	
 	private void setSession(User user, HttpServletRequest request) {
 		HttpSession session = request.getSession(true);
-		session.setAttribute("guest", user);
+		session.setAttribute(this.SESSION_NAME, user);
 	}
 	
 	private void setCookie(String value, int maxAge, HttpServletResponse response) {

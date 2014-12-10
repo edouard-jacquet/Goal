@@ -29,7 +29,7 @@
 			<div class='grid'>
 				<div class='row'>
 					<div class='column small-12 medium-6 large-4 medium-centered'>
-						<form class='panel' method='post' action='login'>
+						<form class='panel login-panel' method='post' action='login'>
 							<div class='panel__header grid'>
 								<div class='row'>
 									<div class='column small-12 text-center'>
@@ -38,7 +38,7 @@
 									</div>
 								</div>
 							</div>
-							<div class='panel__body grid'>
+							<div class='panel__body login-panel__body grid'>
 								<div class='row'>
 									<div class='column small-12'>
 										<input class='form__control' type='text' name='login' placeholder='Login'/>

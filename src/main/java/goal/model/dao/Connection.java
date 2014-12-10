@@ -6,7 +6,7 @@ import javax.persistence.Persistence;
 
 public class Connection {
 	
-	private static final Connection INSTANCE = new Connection();
+	private static final Connection CONNECTION = new Connection();
 	private EntityManager entityManager;
 	
 	private Connection() {
@@ -15,7 +15,7 @@ public class Connection {
 	}
 	
 	public static Connection getInstance() {
-		return INSTANCE;
+		return CONNECTION;
 	}
 	
 	public EntityManager getConnection() {
