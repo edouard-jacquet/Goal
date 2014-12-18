@@ -23,7 +23,8 @@ public class TextAnalyzer extends Analyzer {
 		"for", "if", "in", "into", "is", "it", 
 		"no", "not", "of", "on", "or", "such", 
 		"that", "the", "their", "then", "there", "these", 
-		"they", "this", "to", "was", "will", "with"
+		"they", "this", "to", "was", "will", "with",
+		"does"
 	);
 	private Version version;
 	
@@ -35,10 +36,16 @@ public class TextAnalyzer extends Analyzer {
 	@Override
 	protected TokenStreamComponents createComponents(String field, Reader reader) {
 		Tokenizer source = new StandardTokenizer(version, reader);
-		TokenStream filter = new EnglishMinimalStemFilter(source);
+		TokenStream filter = source;		
+		// Suppression des majuscules
 		filter = new LowerCaseFilter(version, filter);
+		// Suppression des accents
 		filter = new ASCIIFoldingFilter(filter);
-		filter = new StopFilter(version, filter, new CharArraySet(version, STOP_WORDS, false));
+		// Suppression des mots inutiles
+		filter = new StopFilter(version, filter, new CharArraySet(version, STOP_WORDS, true)); 		
+		// Filtre pour les pluriels anglais
+		filter = new EnglishMinimalStemFilter(filter);	
+		// Racination anglais (stemming)
 		filter = new PorterStemFilter(filter);
 		return new TokenStreamComponents(source, filter);
 	}

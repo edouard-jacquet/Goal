@@ -5,6 +5,7 @@ import goal.controller.service.indexer.FileIndexer;
 import goal.controller.service.searcher.FileSearcher;
 import goal.model.bean.FileResult;
 import goal.model.dao.FileDAO;
+import goal.model.dao.FileIndexing;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,10 +26,8 @@ public class ManageFileSearch {
 	public boolean search(String query) {
 		try {
 			TextAnalyzer textAnalyzer = new TextAnalyzer(Version.LUCENE_41);
-			Directory indexDir = new RAMDirectory();
-			FileIndexer fileIndexer = new FileIndexer(indexDir, textAnalyzer);
-			fileIndexer.rebuildIndexes();
-			FileSearcher fileSearcher = new FileSearcher(indexDir, textAnalyzer);
+			FileIndexing fileIndexing = FileIndexing.getInstance();
+			FileSearcher fileSearcher = new FileSearcher(fileIndexing.getIndexes(), textAnalyzer);
 			this.searchFile(fileSearcher, query);
 			return true;
 		}
