@@ -1,5 +1,7 @@
 package goal.controller.service.analyzer;
 
+import goal.Constante;
+
 import java.io.Reader;
 import java.util.Arrays;
 import java.util.List;
@@ -26,11 +28,10 @@ public class TextAnalyzer extends Analyzer {
 		"they", "this", "to", "was", "will", "with",
 		"does"
 	);
-	private Version version;
+	private Version version = Constante.LUCENE_VERSION;
 	
-	public TextAnalyzer(Version version) {
+	public TextAnalyzer() {
 		super();
-		this.version = version;
 	}
 
 	@Override

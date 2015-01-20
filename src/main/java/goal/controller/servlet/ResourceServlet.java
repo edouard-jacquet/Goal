@@ -25,6 +25,11 @@ public class ResourceServlet extends HttpServlet {
 				request.setAttribute("file", fileDAO.getFile(request.getParameter("name")));
 				request.getRequestDispatcher("jsp/file.jsp").forward(request, response);
 			break;
+			case "web":
+				request.setAttribute("title", request.getParameter("name"));
+				request.setAttribute("target", request.getParameter("url"));
+				request.getRequestDispatcher("jsp/web.jsp").forward(request, response);
+			break;
 		}
 		
 	}

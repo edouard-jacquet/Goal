@@ -1,8 +1,7 @@
 package goal.model.manager;
 
 import goal.controller.service.analyzer.TextAnalyzer;
-import goal.controller.service.indexer.FileIndexer;
-import goal.controller.service.searcher.FileSearcher;
+import goal.controller.service.searcher.TextSearcher;
 import goal.model.bean.FileResult;
 import goal.model.dao.FileDAO;
 import goal.model.dao.FileIndexing;
@@ -15,9 +14,6 @@ import java.util.List;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.lucene.search.ScoreDoc;
-import org.apache.lucene.store.Directory;
-import org.apache.lucene.store.RAMDirectory;
-import org.apache.lucene.util.Version;
 
 public class ManageFileSearch {
 	
@@ -25,10 +21,10 @@ public class ManageFileSearch {
 	
 	public boolean search(String query) {
 		try {
-			TextAnalyzer textAnalyzer = new TextAnalyzer(Version.LUCENE_41);
+			TextAnalyzer textAnalyzer = new TextAnalyzer();
 			FileIndexing fileIndexing = FileIndexing.getInstance();
-			FileSearcher fileSearcher = new FileSearcher(fileIndexing.getIndexes(), textAnalyzer);
-			this.searchFile(fileSearcher, query);
+			TextSearcher textSearcher = new TextSearcher(fileIndexing.getIndexes(), textAnalyzer);
+			this.scoring(textSearcher, query);
 			return true;
 		}
 		catch (IOException | ParseException e) {
@@ -37,7 +33,7 @@ public class ManageFileSearch {
 		}
 	}
 	
-	public void searchFile (FileSearcher searcher, String query) 
+	public void scoring(TextSearcher searcher, String query) 
     throws IOException, ParseException {
     	List<ScoreDoc> scoreDocList = Arrays.asList(searcher.performSearch(query));
     	int docId;

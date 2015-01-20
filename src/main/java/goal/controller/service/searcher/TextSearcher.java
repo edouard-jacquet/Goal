@@ -1,5 +1,7 @@
 package goal.controller.service.searcher;
 
+import goal.Constante;
+
 import java.io.IOException;
 
 import org.apache.lucene.analysis.Analyzer;
@@ -13,18 +15,17 @@ import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TopScoreDocCollector;
 import org.apache.lucene.store.Directory;
-import org.apache.lucene.util.Version;
 
-public class FileSearcher {
-	
+public class TextSearcher {
+
 	private IndexSearcher searcher = null;
 	private QueryParser parser = null;
 	int hitsPerPage = 10;
 
-	public FileSearcher(Directory indexDir, Analyzer analyzer) throws IOException {
+	public TextSearcher(Directory indexDir, Analyzer analyzer) throws IOException {
 		IndexReader reader = DirectoryReader.open(indexDir);
 		searcher = new IndexSearcher(reader);
-		parser = new QueryParser(Version.LUCENE_41, "content", analyzer);
+		parser = new QueryParser(Constante.LUCENE_VERSION, "content", analyzer);
 	}
 
 	public ScoreDoc[] performSearch(String queryString)
