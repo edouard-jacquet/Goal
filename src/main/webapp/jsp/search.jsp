@@ -41,22 +41,24 @@
 				<div class='row'>
 					<c:if test="${results != null && results.size() > 0}">
 						<c:forEach var="result" items="${results}" varStatus="idx">
-							<div class='column small-12'>
-								<div class='thumbnail'>
-									<div class='thumbnail__caption'>
-										<h3><c:out value="${result.title}"/></h3>
-										<p class='text-justify'>
-											<c:out value="${result.summarize}"/>
-										</p>
-										<p>
-											<a class='button button--default' href='<c:out value="${result.location}"/>'>Readme</a>
-										</p>
-										<p>
-											Score : <c:out value="${result.score}"/>
-										</p>
+							<c:if test='${idx.index >= 10*(pageCurrent-1) && idx.index < 10*pageCurrent}'>
+								<div class='column small-12'>
+									<div class='thumbnail'>
+										<div class='thumbnail__caption'>
+											<h3><c:out value="${result.title}"/></h3>
+											<p class='text-justify'>
+												<c:out value="${result.summarize}"/>
+											</p>
+											<p>
+												<a class='button button--default' href='<c:out value="${result.location}"/>'>Readme</a>
+											</p>
+											<p>
+												Score : <c:out value="${result.score}"/>
+											</p>
+										</div>
 									</div>
 								</div>
-							</div>
+							</c:if>
 						</c:forEach>
 					</c:if>
 					<c:if test='${results != null && results.size() == 0}'>
@@ -72,10 +74,27 @@
 		</section>
 		<footer id='footer' class='text-center'>
 			<c:if test="${results != null && results.size() > 0}">
-				<ul class='pagination'>		
-					<li class='disabled'><a href='#'>&larr;</a></li>
-					<li class='active'><a href='#'>1</a></li>
-					<li class='disabled'><a href='#'>&rarr;</a></li>
+				<ul class='pagination'>
+					<c:if test='${pageCurrent == 1}'>
+						<li class='disabled'><a href='#'>&larr;</a></li>
+					</c:if>
+					<c:if test='${pageCurrent != 1}'>
+						<li><a href='search?search=<c:out value="${query}"/>&page=<c:out value="${pageCurrent-1}"/>'>&larr;</a></li>
+					</c:if>
+					<c:forEach begin="1" end="${pageMax}" step="1" var="index" varStatus="idx">
+						<c:if test='${index != pageCurrent}'>
+							<li><a href='search?search=<c:out value="${query}"/>&page=<c:out value="${index}"/>'><c:out value="${index}"/></a></li>
+						</c:if>
+						<c:if test='${index == pageCurrent}'>
+							<li class='active'><a href='#'><c:out value="${index}"/></a></li>
+						</c:if>
+					</c:forEach>
+					<c:if test='${pageCurrent == pageMax}'>
+						<li class='disabled'><a href='#'>&rarr;</a></li>
+					</c:if>
+					<c:if test='${pageCurrent != pageMax}'>
+						<li><a href='search?search=<c:out value="${query}"/>&page=<c:out value="${pageCurrent+1}"/>'>&rarr;</a></li>
+					</c:if>
 				</ul>
 			</c:if>
 		</footer>

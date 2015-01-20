@@ -6,7 +6,6 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import goal.controller.service.indexer.FileIndexer;
 import goal.model.bean.FileResult;
 
 public class FileDAO {
@@ -15,7 +14,7 @@ public class FileDAO {
 	private String folder;
 	
 	public FileDAO() {
-		String path = FileIndexer.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+		String path = FileDAO.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 		path = path.substring(0, path.indexOf("WEB-INF"));
 		this.folder = path + DIRECTORY;
 	}

@@ -1,11 +1,26 @@
 package goal.model.bean;
 
-public class Result {
+public class Result implements Comparable<Result> {
 	
 	private String title;
 	private String summarize;
 	private String location;
 	private double score;
+	
+	public int compareTo(Result result) {
+		if(this.getScore() == result.getScore()) {
+			return 0;
+		}
+		else if(this.getScore() < result.getScore()) {
+			return -1;
+		}
+		else if(this.getScore() > result.getScore()) {
+			return 1;
+		}
+		else {
+			return 0;
+		}
+	}
 	
 	public String getTitle() {
 		return title;
