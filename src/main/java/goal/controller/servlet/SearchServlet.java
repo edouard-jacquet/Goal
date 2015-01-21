@@ -26,6 +26,7 @@ public class SearchServlet extends HttpServlet {
 				request.setAttribute("pageCurrent", request.getParameter("page"));
 				request.setAttribute("pageMax", (int)Math.ceil(((float)manageSearch.getResults().size()) / 10));
 				request.setAttribute("results", manageSearch.getResults());
+				request.setAttribute("suggestions", manageSearch.getSuggestions());
 			}
 		}
 		request.getRequestDispatcher("jsp/search.jsp").forward(request, response);

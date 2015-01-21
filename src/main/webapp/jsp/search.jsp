@@ -39,6 +39,15 @@
 			<c:import url="notifications.jsp"/>
 			<div class='grid'>
 				<div class='row'>
+					<c:if test="${suggestions != null && suggestions.size() > 0}">
+						<ul>
+							<c:forEach var="suggestion" items="${suggestions}" varStatus="idx">
+								<li><a href="#"><c:out value="${suggestion}" /></a></li>
+							</c:forEach>
+						</ul>
+					</c:if>
+				</div>
+				<div class='row'>
 					<c:if test="${results != null && results.size() > 0}">
 						<c:forEach var="result" items="${results}" varStatus="idx">
 							<c:if test='${idx.index >= 10*(pageCurrent-1) && idx.index < 10*pageCurrent}'>
