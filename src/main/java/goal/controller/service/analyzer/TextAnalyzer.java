@@ -14,6 +14,8 @@ import org.apache.lucene.analysis.core.StopFilter;
 import org.apache.lucene.analysis.en.EnglishMinimalStemFilter;
 import org.apache.lucene.analysis.en.PorterStemFilter;
 import org.apache.lucene.analysis.miscellaneous.ASCIIFoldingFilter;
+import org.apache.lucene.analysis.ngram.EdgeNGramTokenFilter;
+import org.apache.lucene.analysis.ngram.EdgeNGramTokenFilter.Side;
 import org.apache.lucene.analysis.standard.StandardTokenizer;
 import org.apache.lucene.analysis.util.CharArraySet;
 import org.apache.lucene.util.Version;
@@ -48,6 +50,8 @@ public class TextAnalyzer extends Analyzer {
 		filter = new EnglishMinimalStemFilter(filter);	
 		// Racination anglais (stemming)
 		filter = new PorterStemFilter(filter);
+		// Autocomplete
+		filter = new EdgeNGramTokenFilter(version, filter, Side.FRONT, 1, 20);
 		return new TokenStreamComponents(source, filter);
 	}
 	
