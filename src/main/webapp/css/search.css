@@ -2,3 +2,7 @@
    => SEARCH
 \* ============================== */
 
+
+.bootypo--txt:before { content:'\E030'; }
+.bootypo--web:before { content:'\2601' }
+.bootypo--dwh:before { content:'\E043' }

@@ -11,6 +11,7 @@
 		<title>file - <c:out value="${file.title}"/></title>
 		<link rel='stylesheet' type='text/css' href='css/bootstrap.css' />
 		<link rel='stylesheet' type='text/css' href='css/style.css' />
+		<link rel='stylesheet' type='text/css' href='css/file.css' />
 		<script src='js/jquery.js'></script>
 		<script src='js/bootstrap.js'></script>
 	</head>

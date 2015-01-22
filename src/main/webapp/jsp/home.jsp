@@ -36,9 +36,9 @@
 				</div>
 				<div class='row'>
 					<div class='column small-12 medium-6 medium-centered'>
-						<form method='post' action='search'>
+						<form method='get' action='search'>
 							<div class='input-group'>
-								<input class='form__control' type='text' name='search' placeholder='Search...'/>
+								<input class='form__control' type='text' name='query' placeholder='Search...'/>
 								<span class='input-group__button'>
 									<input class='button button--default' type='submit' value='Goal'/>
 								</span>
