@@ -11,7 +11,7 @@
 		<title>dwh - <c:out value="${title}"/></title>
 		<link rel='stylesheet' type='text/css' href='css/bootstrap.css' />
 		<link rel='stylesheet' type='text/css' href='css/style.css' />
-		<link rel='stylesheet' type='text/css' href='css/web.css' />
+		<link rel='stylesheet' type='text/css' href='css/dwh.css' />
 		<script src='js/jquery.js'></script>
 		<script src='js/bootstrap.js'></script>
 	</head>
@@ -32,7 +32,9 @@
 			<div class='grid'>
 				<div class='row'>
 					<div class='column small-12'>
-						<iframe src='<c:out value="${target}"/>'></iframe>
+						<object data='<c:out value="${target}"/>' type='application/pdf'>
+							<embed src='<c:out value="${target}"/>'/>
+						</object>
 					</div>
 				</div>
 			</div>
