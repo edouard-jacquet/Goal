@@ -60,7 +60,7 @@
 											<h3>
 												<c:if test="${result.getClass().simpleName == 'FileResult'}"><span class='bootypo bootypo--txt'></span></c:if>
 												<c:if test="${result.getClass().simpleName == 'WebResult'}"><span class='bootypo bootypo--web'></span></c:if>
-												<c:if test="${result.getClass().simpleName == 'DWHResult'}"><span class='bootypo bootypo--dwh'></span></c:if>
+												<c:if test="${result.getClass().simpleName == 'DwhResult'}"><span class='bootypo bootypo--dwh'></span></c:if>
 												<c:out value="${result.title}"/>
 											</h3>
 											<p class='text-justify'>

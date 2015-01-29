@@ -30,6 +30,11 @@ public class ResourceServlet extends HttpServlet {
 				request.setAttribute("target", request.getParameter("url"));
 				request.getRequestDispatcher("jsp/web.jsp").forward(request, response);
 			break;
+			case "dwh":
+				request.setAttribute("title", request.getParameter("name"));
+				request.setAttribute("target", request.getParameter("url"));
+				request.getRequestDispatcher("jsp/dwh.jsp").forward(request, response);
+			break;
 		}
 		
 	}
