@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @AttributeOverrides({
 	@AttributeOverride(name="title", column=@Column(name="DATAWAREHOUSE_TITLE", length=200, nullable=false)),
 	@AttributeOverride(name="summarize", column=@Column(name="DATAWAREHOUSE_SUMMARIZE", nullable=false)),
-	@AttributeOverride(name="location", column=@Column(name="DATAWAREHOUSE_LOCATION", length=100, nullable=false))
+	@AttributeOverride(name="location", column=@Column(name="DATAWAREHOUSE_LOCATION", length=200, nullable=false))
 })
 public class DwhResult extends Result {
 
