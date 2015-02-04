@@ -1,10 +1,15 @@
 package goal.model.bean;
 
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Transient;
+
+@MappedSuperclass
 public class Result implements Comparable<Result> {
 	
 	private String title;
 	private String summarize;
 	private String location;
+	@Transient
 	private double score;
 	
 	public int compareTo(Result result) {

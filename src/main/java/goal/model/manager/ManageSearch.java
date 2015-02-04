@@ -31,6 +31,13 @@ public class ManageSearch {
 				}
 			}
 			
+			ManageDwhSearch manageDwhSearch = new ManageDwhSearch();
+			if(manageDwhSearch.search(query)) {
+				for(Result result : manageDwhSearch.getResults()) {
+					results.add(result);
+				}
+			}
+			
 			Collections.sort(results, Collections.reverseOrder());
 			return true;
 		}
