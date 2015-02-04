@@ -9,6 +9,7 @@ import goal.Constante;
 import goal.controller.service.indexer.TextIndexer;
 
 import org.apache.lucene.index.IndexWriterConfig;
+import org.apache.lucene.search.spell.LuceneLevenshteinDistance;
 import org.apache.lucene.search.spell.PlainTextDictionary;
 import org.apache.lucene.search.spell.SpellChecker;
 import org.apache.lucene.store.Directory;
@@ -24,14 +25,15 @@ public class TextSuggestion {
 		path = path.substring(0, path.indexOf("WEB-INF"));
 		File dir = new File(path + DIRECTORY_SUGGESTION + "spellchecker");
 		Directory directory = FSDirectory.open(dir);
-		spellChecker = new SpellChecker(directory);
+		spellChecker = new SpellChecker(directory, new LuceneLevenshteinDistance());
+		spellChecker.setAccuracy(0.8f);
 		PlainTextDictionary dictionary = new PlainTextDictionary(new File(path + DIRECTORY_SUGGESTION + "dictionary.txt"));
 		IndexWriterConfig config = new IndexWriterConfig(Constante.LUCENE_VERSION, null);
 		spellChecker.indexDictionary(dictionary, config, false);
 	}
 	
 	public List<String> suggest(String query) throws IOException {
-		return Arrays.asList(spellChecker.suggestSimilar(query, 5));
+		return Arrays.asList(spellChecker.suggestSimilar(query.toLowerCase(), 5));
 	}
 
 }
