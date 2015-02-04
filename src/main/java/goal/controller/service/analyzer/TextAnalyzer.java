@@ -28,7 +28,7 @@ public class TextAnalyzer extends Analyzer {
 		"no", "not", "of", "on", "or", "such", 
 		"that", "the", "their", "then", "there", "these", 
 		"they", "this", "to", "was", "will", "with",
-		"does"
+		"does", "from"
 	);
 	private Version version = Constante.LUCENE_VERSION;
 	
@@ -51,7 +51,7 @@ public class TextAnalyzer extends Analyzer {
 		// Racination anglais (stemming)
 		filter = new PorterStemFilter(filter);
 		// Autocomplete
-		filter = new EdgeNGramTokenFilter(version, filter, Side.FRONT, 1, 20);
+		filter = new EdgeNGramTokenFilter(version, filter, Side.FRONT, 3, 20);
 		return new TokenStreamComponents(source, filter);
 	}
 	
