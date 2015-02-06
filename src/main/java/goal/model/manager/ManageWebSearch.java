@@ -76,7 +76,7 @@ public class ManageWebSearch {
 			}
 			return true;
 		}
-		catch (IOException | ParseException e) {
+		catch (IOException | ParseException | NullPointerException e) {
 			e.printStackTrace();
 			return false;
 		}
