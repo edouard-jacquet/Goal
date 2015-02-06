@@ -31,7 +31,14 @@
 			<div class='grid'>
 				<div class='row'>
 					<div class='column small-12 text-center'>
-						<span style='font-size:72px;color:#AAAAFF;'>Goal</span>
+						<div class='logo'>
+							<h3 class='logo__title'>
+								<span class='logo__letter--blue'>G</span>
+								<span class='logo__letter--red'>o</span>
+								<span class='logo__letter--yellow'>a</span>
+								<span class='logo__letter--green'>l</span>
+							</h3>
+						</div>
 					</div>
 				</div>
 				<div class='row'>

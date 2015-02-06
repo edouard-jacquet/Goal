@@ -27,8 +27,8 @@ public class ManageWebSearch {
 	private final String HTTP_URI = "default-graph-uri=http://dbpedia.org";
 	private final String HTTP_QUERY_REQUEST = "prefix dbpedia-owl: <http://dbpedia.org/ontology/> SELECT * WHERE {";
 	private final String[] HTTP_QUERY_CLASS = {"SoccerLeague", "SoccerClub", "SoccerPlayer", "SoccerManager", "SoccerTournament", "SoccerClubSeason", "SoccerLeagueSeason"};
-	private final String HTTP_QUERY_FILTER = "FILTER(langMatches(lang(?title), 'EN')) FILTER(langMatches(lang(?abstract), 'EN'))";
-	private final String HTTP_QUERY_LIMIT = " OFFSET 0 LIMIT 10";
+	private final String HTTP_QUERY_FILTER = " FILTER(langMatches(lang(?title), 'EN') && langMatches(lang(?abstract), 'EN'))";
+	private final String HTTP_QUERY_LIMIT = " OFFSET 0 LIMIT 100";
 	// HTML=text/html ; json=application/sparql-results+json
 	private final String HTTP_FORMAT = "application/sparql-results+json";
 	private final String HTTP_TIMEOUT = "5000";
@@ -39,6 +39,7 @@ public class ManageWebSearch {
 	
 	public boolean search(String query) {
 		//Preparation de la requete sparql
+		String prepared = query.replace("\'", "\\'").replace("\"", "\\\"");
 		String QUERY = HTTP_QUERY_REQUEST;
 		for(int i = 0 ; i < HTTP_QUERY_CLASS.length ; i++) {
 			QUERY += "{SELECT distinct ?title, ?abstract, ?resource WHERE {?resource rdf:type <http://dbpedia.org/ontology/" + HTTP_QUERY_CLASS[i] + "> . ?resource dbpedia-owl:abstract ?abstract . ?resource rdfs:label ?title}}";
@@ -46,7 +47,7 @@ public class ManageWebSearch {
 				QUERY += " UNION ";
 			}
 		}
-		QUERY += "FILTER contains(lcase(?title), '" + query + "') FILTER contains(lcase(?abstract), '" + query + "')";
+		QUERY += " FILTER(contains(lcase(?title), '" + prepared + "') || contains(lcase(?abstract), '" + prepared + "'))";
 		QUERY += HTTP_QUERY_FILTER + "}" + HTTP_QUERY_LIMIT;
 		
 		try {
@@ -75,7 +76,7 @@ public class ManageWebSearch {
 			}
 			return true;
 		}
-		catch (IOException | ParseException e) {
+		catch (IOException | ParseException | NullPointerException e) {
 			e.printStackTrace();
 			return false;
 		}

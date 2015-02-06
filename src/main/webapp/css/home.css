@@ -2,6 +2,29 @@
    => HOME
 \* ============================== */
 
+
 html, body {
 	height: 100%;
+}
+
+.logo__title {
+	font-family: 'old-school';
+	font-size: 96px;
+	text-shadow: 0px 0px 3px #000;
+}
+
+.logo__letter--blue {
+	color: #176DEE;
+}
+
+.logo__letter--red {
+	color: #DA4530;
+}
+
+.logo__letter--yellow {
+	color: #FFB800;
+}
+
+.logo__letter--green {
+	color: #009856;
 }

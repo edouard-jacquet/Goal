@@ -33,7 +33,7 @@ public class TextSuggestion {
 	}
 	
 	public List<String> suggest(String query) throws IOException {
-		return Arrays.asList(spellChecker.suggestSimilar(query.toLowerCase(), 5));
+		return Arrays.asList(spellChecker.suggestSimilar(query, 5));
 	}
 
 }
