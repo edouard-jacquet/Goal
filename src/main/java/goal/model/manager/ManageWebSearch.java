@@ -28,7 +28,7 @@ public class ManageWebSearch {
 	private final String HTTP_QUERY_REQUEST = "prefix dbpedia-owl: <http://dbpedia.org/ontology/> SELECT * WHERE {";
 	private final String[] HTTP_QUERY_CLASS = {"SoccerLeague", "SoccerClub", "SoccerPlayer", "SoccerManager", "SoccerTournament", "SoccerClubSeason", "SoccerLeagueSeason"};
 	private final String HTTP_QUERY_FILTER = " FILTER(langMatches(lang(?title), 'EN') && langMatches(lang(?abstract), 'EN'))";
-	private final String HTTP_QUERY_LIMIT = " OFFSET 0 LIMIT 10";
+	private final String HTTP_QUERY_LIMIT = " OFFSET 0 LIMIT 100";
 	// HTML=text/html ; json=application/sparql-results+json
 	private final String HTTP_FORMAT = "application/sparql-results+json";
 	private final String HTTP_TIMEOUT = "5000";
