@@ -2,6 +2,14 @@
    => STYLE
 \* ============================== */
 
+
+@font-face {
+	font-family: 'old-school';
+	src: url("font/old-school.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+}
+
 html {
 	height: 100%;
 }
@@ -20,6 +28,11 @@ body {
 
 #header > .navigation-bar {
 	margin-bottom: 0;
+}
+
+#header > .navigation-bar .navigation-bar__brand {
+	font-family: 'old-school';
+	font-size: 24px;
 }
 
 #body {
