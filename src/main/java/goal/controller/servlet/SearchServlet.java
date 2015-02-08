@@ -23,7 +23,7 @@ public class SearchServlet extends HttpServlet {
 		if(query.length() > 0) {
 			ManageSearch manageSearch = new ManageSearch();
 			request.setAttribute("query", query);
-			if(manageSearch.search(query.toLowerCase())) {
+			if(manageSearch.search(query.toLowerCase(), manageUser.getUser(request.getSession()))) {
 				if(request.getParameter("page") != null && Pattern.matches("[0-9]+", request.getParameter("page"))) {
 					request.setAttribute("pageCurrent", request.getParameter("page"));
 				}

@@ -147,6 +147,10 @@ public class ManageUser {
 		session.setAttribute(this.SESSION_NAME, user);
 	}
 	
+	public User getUser(HttpSession session){
+		return (User) session.getAttribute(this.SESSION_NAME);
+	}
+	
 	private void setCookie(String value, int maxAge, HttpServletResponse response) {
 		Cookie cookie = new Cookie(this.COOKIE_NAME, value);
 		cookie.setMaxAge(maxAge);

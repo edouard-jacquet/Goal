@@ -52,4 +52,11 @@ public class Result implements Comparable<Result> {
 		this.score = score;
 	}
 	
+	public boolean sameDocumentAs(Result otherDoc){
+		if(this.getClass().equals(otherDoc.getClass()))
+			if(this.location.equals(otherDoc.location))
+				return true;
+		return false;
+	}
+	
 }
