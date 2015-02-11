@@ -26,14 +26,14 @@ public class TextSuggestion {
 		File dir = new File(path + DIRECTORY_SUGGESTION + "spellchecker");
 		Directory directory = FSDirectory.open(dir);
 		spellChecker = new SpellChecker(directory, new LuceneLevenshteinDistance());
-		spellChecker.setAccuracy(0.8f);
+		//spellChecker.setAccuracy(0.3f);
 		PlainTextDictionary dictionary = new PlainTextDictionary(new File(path + DIRECTORY_SUGGESTION + "dictionary.txt"));
 		IndexWriterConfig config = new IndexWriterConfig(Constante.LUCENE_VERSION, null);
 		spellChecker.indexDictionary(dictionary, config, false);
 	}
 	
 	public List<String> suggest(String query) throws IOException {
-		return Arrays.asList(spellChecker.suggestSimilar(query, 5));
+		return Arrays.asList(spellChecker.suggestSimilar(query, 5, 0.3f));
 	}
 
 }
