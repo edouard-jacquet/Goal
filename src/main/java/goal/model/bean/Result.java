@@ -1,11 +1,31 @@
 package goal.model.bean;
 
-public class Result {
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Transient;
+
+@MappedSuperclass
+public class Result implements Comparable<Result> {
 	
 	private String title;
 	private String summarize;
 	private String location;
+	@Transient
 	private double score;
+	
+	public int compareTo(Result result) {
+		if(this.getScore() == result.getScore()) {
+			return 0;
+		}
+		else if(this.getScore() < result.getScore()) {
+			return -1;
+		}
+		else if(this.getScore() > result.getScore()) {
+			return 1;
+		}
+		else {
+			return 0;
+		}
+	}
 	
 	public String getTitle() {
 		return title;
@@ -30,6 +50,13 @@ public class Result {
 	}
 	public void setScore(double score) {
 		this.score = score;
+	}
+	
+	public boolean sameDocumentAs(Result otherDoc){
+		if(this.getClass().equals(otherDoc.getClass()))
+			if(this.location.equals(otherDoc.location))
+				return true;
+		return false;
 	}
 	
 }
